@@ -1,31 +1,57 @@
+'use client'
+
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import Header from "./header/page";
-import Sidebar from "./sidebar/page";
-import Body from "./body/page";
+import All_Posts from "./body/allPosts/page";
+import My_Posts from "./body/myPost/page";
+import CreateNewPost from "./body/createNew/page";
+
 const Dashboard = () => {
-  const [option, setoptios] = useState("");
-  const router = useRouter();
-  const handleTabs = (value) => {
-    if (value === "my_posts") {
-      console.log("hello:::");
-    }
+  const [activeTab, setActiveTab] = useState("All_Posts");
+
+  const rendergroup = {
+    All_Posts: All_Posts,
+    My_Posts: My_Posts,
+    CreateNewPost: CreateNewPost
   };
+
+  const options = [
+    { name: "All Posts", identifier: "All_Posts" },
+    { name: "My Posts", identifier: "My_Posts" },
+    { name: "New Post", identifier: "CreateNewPost" },
+  ];
+
+  const ActiveComponent = rendergroup[activeTab];
+
   return (
-    <div className="w-full h-full flex flex-col">
-      <div>
-        <Header />
-      </div>
+    <div className="w-full h-screen flex flex-col">
+      <Header />
       <hr />
-      <div className="w-full h-180 flex">
-        <div className="w-50 border-r">
-          <Sidebar 
-          handleTabs = {handleTabs}
-          />
-        </div>
-        <div>
-          <Body />
-        </div>
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <aside className="w-1/6 border-r p-4 bg-gray-100">
+          <ul className="space-y-2">
+            {options.map((item) => (
+              <li key={item.identifier}>
+                <button
+                  onClick={() => setActiveTab(item.identifier)}
+                  className={`w-full text-left p-2 rounded ${
+                    activeTab === item.identifier
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-white hover:bg-gray-200'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        {/* Body Content */}
+        <main className="w-3/4 p-6">
+          {ActiveComponent ? <ActiveComponent /> : null}
+        </main>
       </div>
     </div>
   );
