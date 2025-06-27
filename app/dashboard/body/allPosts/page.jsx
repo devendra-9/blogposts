@@ -7,7 +7,7 @@ const AllPostsComponent = () => {
 
   const all_posts = useCallback(async () => {
     try {
-      const response = await fetch("http://localhost:4000/v1/all_posts", {
+      const response = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/all_posts`, {
         method: "GET",
       });
       const result = await response.json();
@@ -18,7 +18,7 @@ const AllPostsComponent = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("http://localhost:4000");
+    const socket = io(`${NEXT_PUBLIC_SOCKET}`);
     all_posts();
     socket.on("posts_updated", all_posts);
 

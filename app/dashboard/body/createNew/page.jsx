@@ -22,7 +22,7 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/v1/create_post", {
+      const response = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/create_post`, {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),
