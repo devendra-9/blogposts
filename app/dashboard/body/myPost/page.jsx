@@ -6,7 +6,7 @@ const MyPosts = () => {
   const [formData, setFormData] = useState({ title: "", body: "" });
 
   const fetchMyPosts = async () => {
-    const result = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/my_posts`, {
+    const result = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/v1/my_posts`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -20,7 +20,7 @@ const MyPosts = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/delete_post/${id}`, {
+      const res = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/v1/delete_post/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: {
@@ -51,7 +51,7 @@ const MyPosts = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/edit_post/${editingPost._id}`, {
+      const res = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/v1/edit_post/${editingPost._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -46,14 +46,14 @@ const Header = () => {
         email: formdata?.email,
         password: formdata?.password,
       };
-      url = `${NEXT_PUBLIC_BACKEND_CONNECTION}/existing_user`;
+      url = `${NEXT_PUBLIC_BACKEND_CONNECTION}/v1/existing_user`;
     } else {
       body = {
         username: formdata?.username,
         password: formdata?.password,
         email: formdata?.email,
       };
-      url = `${NEXT_PUBLIC_BACKEND_CONNECTION}/add_user`;
+      url = `${NEXT_PUBLIC_BACKEND_CONNECTION}/v1/add_user`;
     }
     try {
       const response = await fetch(url, {
@@ -92,7 +92,7 @@ const Header = () => {
 
   const isloggedIn = async () => {
     try {
-      const response = await fetch(`${hNEXT_PUBLIC_BACKEND_CONNECTION}/auth/check`, {
+      const response = await fetch(`${hNEXT_PUBLIC_BACKEND_CONNECTION}/v1/auth/check`, {
         method: "GET",
         credentials: "include",
       });
@@ -109,7 +109,7 @@ const Header = () => {
   }, []);
 
   const handleLogout = async () => {
-    const response = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/logout`, {
+    const response = await fetch(`${NEXT_PUBLIC_BACKEND_CONNECTION}/v1/logout`, {
       method: "POST",
       credentials: "include",
     });
